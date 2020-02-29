@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastro de Produtos</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Cadastro de Produtos</strong>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" th:object="${produto}" th:action="@{/save}" method="POST" style="margin: 10px">
+            <div class="form-group">
+                <fieldset>
+                    <div class="form-group row">
+                        <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                            <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                <span th:text="${detailedError.message}"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-9" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+                            <label>Nome</label>
+                            <input type="text" class="form-control input-sm" th:field="*{nome}" autofocus="autofocus" placeholder="Informe o nome" size="500" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('valorCompra')}? 'has-error'">
+                            <label>Valor de Compra</label>
+                            <input type="text" class="form-control input-sm" th:field="*{valorCompra}" autofocus="autofocus"  placeholder="Informe Valor de Compra" size="15"/>
+
+                        </div>
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('valorVenda')}? 'has-error'">
+                            <label>Valor de Venda</label>
+                            <input type="text" class="form-control input-sm" th:field="*{valorVenda}" autofocus="autofocus"  placeholder="Informe Valor de Venda" size="15"/>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('dataCompra')}? 'has-error'">
+                            <label>Data de Compra</label>
+                            <input type="date" class="form-control input-sm" th:field="*{dataCompra}"/>
+                        </div>
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('dataValidade')}? 'has-error'">
+                            <label>Data de Validade</label>
+                            <input type="date" class="form-control input-sm" th:field="*{dataValidade}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-2" th:classappend="${#fields.hasErrors('quantidade')}? 'has-error'">
+                            <label>Quantidade</label>
+                            <input type="text" class="form-control input-sm" th:field="*{quantidade}" autofocus="autofocus" placeholder="quantidade" maxlength="1111"/>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group row">
+                        <div class="col-md-9" th:classappend="${#fields.hasErrors('descricao')}? 'has-error'">
+                            <label>Descricao</label>
+                            <textarea class="form-control input-sm" th:field="*{descricao}" cols="5" rows="5" placeholder="Informe Descrição"></textarea>
+
+                        </div>
+                    </div>
+
+
+                </fieldset>
+            </div>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                <a th:href="@{/}" class="btn btn-sm btn-default">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

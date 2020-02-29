@@ -1,0 +1,59 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Lista de Usuarios</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="panel panel-default" style="margin: 10px">
+    <div class="panel-heading">
+        <h1 class="panel-title">Lista de Usuarios</h1>
+    </div>
+
+    <div class="panel-body">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>CPF</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Login</th>
+                <th>Senha</th>
+
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.cpf}"></td>
+                <td th:text="${usuario.nome}"></td>
+                <td th:text="${usuario.email}"></td>
+                <td th:text="${usuario.login}"></td>
+                <td th:text="${usuario.senha}"></td>
+
+
+                <td>
+                    <div class="btn-group pull-right">
+                        <!--/*@thymesVar id="id" type=""*/-->
+                        <a class="btn btn-sm btn-primary" th:href="@{/user/editar/{cpf}(cpf=${usuario.cpf})}" >Editar</a>
+                        <a class="delete btn btn-sm btn-danger" th:href="@{/user/delete/{cpf}(cpf=${usuario.cpf})}">Excluir</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <a class="btn btn-sm btn-success" th:href="@{/user/adduser}" >Adicionar</a>
+    </div>
+</div>
+
+</body>
+</html>
