@@ -11,7 +11,9 @@ import javax.sql.DataSource;
 public class MercadoApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(MercadoApplication.class, args);
+
     }
 
 
