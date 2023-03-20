@@ -1,4 +1,4 @@
-package br.com.mercado.mercado.model;
+/*package br.com.mercado.mercado.model;
 
 import br.com.mercado.mercado.repositorio.IRepositorioGenerico;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"} )
-public abstract class Pessoa implements IRepositorioGenerico, Serializable {
+public abstract class Pessoa <T, ID extends Serializable> implements IRepositorioGenerico<T, ID> {
 
     private static final long serialVersionUID = 1L;
 
@@ -120,3 +120,4 @@ public abstract class Pessoa implements IRepositorioGenerico, Serializable {
         return Objects.hash(getCpf(), getNome(), getEmail(), getLogin(), getSenha(), getConfirmaSenha());
     }
 }
+*/

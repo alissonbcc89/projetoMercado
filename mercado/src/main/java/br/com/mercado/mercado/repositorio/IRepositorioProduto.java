@@ -17,17 +17,21 @@ public interface IRepositorioProduto extends CrudRepository<Produto, Long> {
     void deleteById(Long id);
 
 //     Produto findOne(Long id);
-    Produto findProdutoById(Long id);
+    //Produto findProdutoById(Long id);
+
+   // Optional<Produto> findById(Long id);
 
     Produto getOne(Long id);
 
     //void updateProduto(Long id);
 
-   // Produto getById(Long id);
+    //Produto getById(Long id);
 
 
 
-    //public Optional<Produto> findById(Long id);
+    public Optional <Produto> findById(Long id);
+
+    Produto findProdutoById(Long id);
 
     //void putById(Long id);
 
@@ -39,7 +43,7 @@ public interface IRepositorioProduto extends CrudRepository<Produto, Long> {
 
   //  Produto findProdutosById(Long id);
 
-   // Produto findById(Long id);
+   //Optional<Produto> findById(Long id);
 
 
  //  Optional<Produto> findOne(Long id);

@@ -27,7 +27,7 @@ public class ProdutoController  {
         this.prod=rp;
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/prod")
     public ModelAndView listar(){
             /*ModelAndView mv = new ModelAndView();
 //mv.setViewName("/views/stat/schedule"); //뷰 파일 앞에 /를 붙이는게 문제
@@ -64,6 +64,7 @@ mv.setViewName("views/stat/schedule"); */
         if(result.hasErrors()) {
             return add(produto);
         }
+       // produto.setId(prod.findProdutoById());
 
         prod.save(produto);
 
@@ -75,10 +76,22 @@ mv.setViewName("views/stat/schedule"); */
     @GetMapping("/edit/{id}")
     public ModelAndView edit(  @PathVariable("id") Long id) {
 //        @PathVariable("id") Long id
-        verifyIfProdutoExists(id);
+        //boolean a = verifyIfProdutoExists(id);
+        Produto p = prod.findProdutoById(id);
+        p.setId(id);
+        //prod.save(p);
+        ModelAndView mv = new ModelAndView("produto/postAdd");
+        mv.addObject("produto", p);
+
+        prod.save(p);
+        //return mv;
+
+        return listar();
+
+
 
         //prod.deleteById(id);
-        Produto produto = prod.getOne(id);
+        //Produto produto = prod.getOne(id);
 //        update(produto);
 
 //        prod.updateProduto(id);
@@ -86,8 +99,12 @@ mv.setViewName("views/stat/schedule"); */
 //        Produto produto = produto.setId(id);
 //        produto.setId(id);
      //   prod.deleteById(id);
-        return  add(produto);
+      //  return  add(produto);
 
+        //verifyIfProdutoExists(id);
+       // prod.updateById(id);
+
+      //  return listar();
         /*  @PutMapping("/editt/{id}")
     public ResponseEntity<?> update(@RequestBody Produto produto) {
         verifyIfProdutoExists(produto.getId());
@@ -147,7 +164,7 @@ mv.setViewName("views/stat/schedule"); */
 
     }
 
-    private  void verifyIfProdutoExists(Long id){
+    private void verifyIfProdutoExists(Long id){
         if(prod.findById(id)  == null)
             throw new ResourceNotFoundException("Student not found for ID:" +id);
     }
