@@ -1,16 +1,16 @@
 package br.com.mercado.mercado.endpoint;
 
-import br.com.mercado.mercado.error.ResourceNotFoundException;
+import br.com.mercado.mercado.endpoint.error.ResourceNotFoundException;
 import br.com.mercado.mercado.model.Produto;
 import br.com.mercado.mercado.repositorio.IRepositorioProduto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 
@@ -20,6 +20,9 @@ public class ProdutoController  {
 
 
     private IRepositorioProduto prod;
+
+    //
+    private static String add;
 
     @Autowired
     public ProdutoController(IRepositorioProduto rp)
@@ -48,18 +51,59 @@ mv.setViewName("views/stat/schedule"); */
 
         return listar();
     }
+    @GetMapping("/update/{id}")
+    public ModelAndView update(@PathVariable("id") long id, Produto pr) {
+        //
+        Produto p = prod.findProdutoById(pr.getId());
+        //prod.save(p);
+        //p.setId(p.getId());
+        //prod.save(p);
+        ModelAndView mv = new ModelAndView("produto/postAdd");
+        mv.addObject("produto", p);
+
+    //    prod.save(p);
+        //return mv;
+
+        return mv;
+
+
+
+    }
+
+
+
 
     @GetMapping("/add")
     public ModelAndView add(Produto produto) {
 
-        ModelAndView mv = new ModelAndView("produto/postAdd");
+        ModelAndView mv = new ModelAndView("/produto/postAdd");
         mv.addObject("produto", produto);
 
         return mv;
     }
 
+    @PutMapping("/productupdate/{id}")
+    public ModelAndView productupdate(@PathVariable(value = "id") long id , Produto produto, BindingResult result) {
+
+
+        //Produto p = prod.findProdutoById(produto.getId());
+
+
+        if(result.hasErrors()) {
+            return add(produto);
+        }
+
+
+        // produto.setId(prod.findProdutoById());
+
+        this.prod.save(produto);
+
+        return listar();
+    }
+
     @PostMapping("/save")
-    public ModelAndView save(@Valid Produto produto, BindingResult result) {
+    public ModelAndView save(Produto produto, BindingResult result) {
+
 
         if(result.hasErrors()) {
             return add(produto);
@@ -72,47 +116,23 @@ mv.setViewName("views/stat/schedule"); */
     }
 
 
-
-    @GetMapping("/edit/{id}")
-    public ModelAndView edit(  @PathVariable("id") Long id) {
-//        @PathVariable("id") Long id
-        //boolean a = verifyIfProdutoExists(id);
+    /*GetMapping("/editarproduto/{id}")
+    public ModelAndView eeditarproduto(@PathVariable("id") Long id){
         Produto p = prod.findProdutoById(id);
-        p.setId(id);
-        //prod.save(p);
-        ModelAndView mv = new ModelAndView("produto/postAdd");
+
+        ModelAndView mv = new ModelAndView("/produto/postAdd");
         mv.addObject("produto", p);
 
-        prod.save(p);
-        //return mv;
+        return mv;
 
-        return listar();
+        //model.addAttribute("produto", p);
+
+        //return listar();
+
+    }*/
 
 
 
-        //prod.deleteById(id);
-        //Produto produto = prod.getOne(id);
-//        update(produto);
-
-//        prod.updateProduto(id);
-
-//        Produto produto = produto.setId(id);
-//        produto.setId(id);
-     //   prod.deleteById(id);
-      //  return  add(produto);
-
-        //verifyIfProdutoExists(id);
-       // prod.updateById(id);
-
-      //  return listar();
-        /*  @PutMapping("/editt/{id}")
-    public ResponseEntity<?> update(@RequestBody Produto produto) {
-        verifyIfProdutoExists(produto.getId());
-        prod.save(produto);
-        return new ResponseEntity<>( HttpStatus.OK );
-
-    } */
-    }
 
 
 

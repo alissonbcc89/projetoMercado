@@ -1,35 +1,95 @@
 package br.com.mercado.mercado.model;
 
+import br.com.mercado.mercado.enums.RoleName;
+import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 
 @Entity
-public class Usuario implements Serializable {
-
+@Table(name = "TB_USER")
+public class Usuario implements UserDetails, Serializable {
     private static final long serialVersionUID = 1L;
 
+
     @Id
-    private Long cpf;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+    private String cpf;
     private String nome;
+    @Column(nullable = false, unique = true)
+    private String username;
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
     private String email;
-    private String login;
-    private String senha;
-    private String confirmaSenha;
 
-//    @Temporal(TemporalType.DATE)
-  //  private LocalDate dataCadastro;
+    @ManyToMany
+    @JoinTable(name= "TB_USERS_ROLES",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<RoleModel> roles;
 
-    public Usuario() {
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles;
     }
 
-    public Long getCpf() {
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(Long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -41,6 +101,14 @@ public class Usuario implements Serializable {
         this.nome = nome;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -49,54 +117,11 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    public String getLogin() {
-        return login;
+    public List<RoleModel> getRoles() {
+        return roles;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getConfirmaSenha() {
-        return confirmaSenha;
-    }
-
-    public void setConfirmaSenha(String cs) {
-        if(cs.equals(this.senha)) {
-            this.confirmaSenha = cs;
-        }
-    }
-
-//    public LocalDate getDataCadastro() {
-        //return dataCadastro;
-    //}
-
-    //public void setDataCadastro() {
-      //  LocalDate agora= LocalDate.now();
-        //this.dataCadastro = agora;
-    //}
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Usuario usuario = (Usuario) o;
-
-        return cpf != null ? cpf.equals(usuario.cpf) : usuario.cpf == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return cpf != null ? cpf.hashCode() : 0;
+    public void setRoles(List<RoleModel> roles) {
+        this.roles = roles;
     }
 }

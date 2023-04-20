@@ -1,7 +1,7 @@
 package br.com.mercado.mercado.handler;
 
-import br.com.mercado.mercado.error.ResosurceNotFoundDetails;
-import br.com.mercado.mercado.error.ResourceNotFoundException;
+import br.com.mercado.mercado.endpoint.error.ResosurceNotFoundDetails;
+import br.com.mercado.mercado.endpoint.error.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

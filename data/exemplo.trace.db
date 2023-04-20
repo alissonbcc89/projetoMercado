@@ -1,0 +1,6 @@
+2023-03-26 02:54:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "X'5812f724401e4311b5126a27c720372d' (PRODUTO: ""ID"" BIGINT NOT NULL)"; SQL statement:
+insert into produto (data_compra, data_validade, descricao, nome, quantidade, valor_compra, valor_venda, id) values (?, ?, ?, ?, ?, ?, ?, ?) [22018-200]
+2023-03-26 11:18:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "X'78c8bb9f39a947cb96bdcb8cacdae222' (PRODUTO: ""ID"" BIGINT NOT NULL)"; SQL statement:
+insert into produto (data_compra, data_validade, descricao, nome, quantidade, valor_compra, valor_venda, id) values (?, ?, ?, ?, ?, ?, ?, ?) [22018-200]

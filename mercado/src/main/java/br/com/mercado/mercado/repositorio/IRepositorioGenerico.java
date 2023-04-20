@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface IRepositorioGenerico <T, ID extends Serializable>{
+public interface IRepositorioGenerico extends CrudRepository<Pessoa, Long>{
 
     List<T> findAll();
     T save(T entity);

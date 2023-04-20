@@ -1,4 +1,4 @@
-package br.com.mercado.mercado.endpoint;
+/*package br.com.mercado.mercado.endpoint;
 
 
 import org.springframework.stereotype.Controller;
@@ -17,4 +17,4 @@ public class HomeController {
         return new ModelAndView("/listarprodutos");
     }
 
-}
+}*/

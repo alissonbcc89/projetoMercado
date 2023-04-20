@@ -1,6 +1,9 @@
 package br.com.mercado.mercado.model;
 
-import org.springframework.context.annotation.Bean;
+//import lombok.AllArgsConstructor;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//import org.springframework.context.annotation.Bean;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -8,7 +11,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
-
+//@AllArgsConstructor
+//@Data
 @Entity
 public class Produto implements Serializable {
 
@@ -32,7 +36,8 @@ public class Produto implements Serializable {
    private Date dataCompra;
     private Long quantidade;
 
-
+    @OneToOne
+    Usuario usuario;
 
     public Produto() {
     }
