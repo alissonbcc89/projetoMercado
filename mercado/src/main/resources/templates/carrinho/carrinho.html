@@ -81,21 +81,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="linha : ${linhasItens}">
-                            <td th:text="${linha.getProduto().getNome()}"></td>
-                            <td th:text="${linha.getProduto().getQuantidade()}"></td>
-                            <td th:text="${linha.getValor_unitario()}"></td>
-                            <td th:text="${linha.getValor_total()}"></td>
+                        <tr th:each="linhaIten : ${linhasIten}">
+                            <td th:text="${linhaIten.getProduto().getNome()}"></td>
+                            <td th:text="${linhaIten.getProduto().getQuantidade()}"></td>
+                            <td th:text="${linhaIten.getValor_unitario()}"></td>
+                            <td th:text="${linhaIten.getValor_total()}"></td>
                             <td></td>
                             <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
                         </tr>
-                        <tr th:each="linha : ${linhasItens}">
+                        <tr th:each="linhaIten : ${linhaIten}">
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td><strong>Total:</strong></td>
-                            <td th:text="${linha.getValor_total()}"></td>
+                            <td th:text="${linhaIten.getValor_total()}"></td>
                             <td class="text-right"><strong> </strong></td>
                         </tr>
                         </tbody>

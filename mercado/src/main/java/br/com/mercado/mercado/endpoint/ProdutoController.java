@@ -56,12 +56,12 @@ mv.setViewName("views/stat/schedule"); */
         //
         Produto p = prod.findProdutoById(pr.getId());
         //prod.save(p);
-        //p.setId(p.getId());
+        p.setId((long) id);
         //prod.save(p);
-        ModelAndView mv = new ModelAndView("produto/postAdd");
+        ModelAndView mv = new ModelAndView("produto/update");
         mv.addObject("produto", p);
 
-    //    prod.save(p);
+
         //return mv;
 
         return mv;

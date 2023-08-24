@@ -73,6 +73,7 @@ public class LinhaItem implements Serializable {
         return valor_total;
     }
 
+
     public void setValor_total(double valor_total) {
         this.valor_total = this.produto.valorVenda * this.quantidade;
     }
@@ -103,4 +104,17 @@ public class LinhaItem implements Serializable {
     public int hashCode() {
         return Objects.hash(getId(), getProduto(), getQuantidade(), getValor_unitario(), getValor_total());
     }
+
+    @Override
+    public String toString() {
+        return "LinhaItem{" +
+                "id=" + id +
+                ", produto=" + produto +
+                ", quantidade=" + quantidade +
+                ", totalnota=" + totalnota +
+                ", valor_unitario=" + valor_unitario +
+                ", valor_total=" + valor_total +
+                '}';
+    }
+
 }

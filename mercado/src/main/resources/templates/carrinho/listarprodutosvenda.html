@@ -86,7 +86,7 @@
 
                     <td>
                         <div class="btn-group pull-right" >
-                            <a class="bi bi-cart-plus-fill btn btn-outline-secondary" 100px th:object="${produto}" th:action="@{/itenadd}" method="POST" ></a>
+                            <a class="bi bi-cart-plus-fill btn btn-outline-secondary" 100px  th:object="${produto}" th:action="@{/itenadd/id/{id}(id=${produto.id})}" method="POST"></a>
                         </div>
                     </td>
                 </tr>
